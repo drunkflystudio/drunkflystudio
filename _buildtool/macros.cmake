@@ -160,7 +160,7 @@ endmacro()
 
 macro(build_project)
     set(options PARALLEL)
-    set(one DIRECTORY)
+    set(one DIRECTORY BUILD_TYPE)
     set(multi TARGETS)
     cmake_parse_arguments(bp "${options}" "${one}" "${multi}" ${ARGN})
 
