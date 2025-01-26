@@ -1,6 +1,6 @@
 [submodule "base-common"]
 	path = base-common
-	url = git@github.com:drunkflystudio/base-common
+	url = https://github.com/drunkflystudio/base-common
 [submodule "base-compiler"]
 	path = base-compiler
-	url = git@github.com:drunkflystudio/base-compiler
+	url = https://github.com/drunkflystudio/base-compiler
