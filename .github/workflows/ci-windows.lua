@@ -47,7 +47,7 @@ function build_multiconfig(name, command, dir)
     - name: Upload artifacts for ]]..name..[[ (Debug)
       uses: actions/upload-artifact@v4
       with:
-        name: ]]..name..[[\n
+        name: ]]..name..[[ (Debug)
         path: _build/]]..dir..[[/Debug
         if-no-files-found: error
         include-hidden-files: false
@@ -55,7 +55,7 @@ function build_multiconfig(name, command, dir)
     - name: Upload artifacts for ]]..name..[[ (Release)
       uses: actions/upload-artifact@v4
       with:
-        name: ]]..name..[[\n
+        name: ]]..name..[[ (Release)
         path: _build/]]..dir..[[/Release
         if-no-files-found: error
         include-hidden-files: false
