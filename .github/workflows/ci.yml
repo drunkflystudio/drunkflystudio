@@ -1,0 +1,24 @@
+# This continuous integration pipeline is triggered anytime a user pushes code to the repo.
+name: Continuous Integration
+
+# Trigger on every master branch push and pull request
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Build with Borland C++ 4.52 (Debug)
+      run: |
+        _build\win32_bc45_debug.cmd
+    - name: Build with Borland C++ 4.52 (Release)
+      run: |
+        _build\win32_bc45_release.cmd
