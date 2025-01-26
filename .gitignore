@@ -1,0 +1,17 @@
+/_build/_host_
+/_build/html5
+/_build/linux64
+/_build/win32
+/_build/win64
+/_tools/borland45
+/_tools/clang350_linux64
+/_tools/emsdk
+/_tools/gnuwin32
+/_tools/mingw32_make
+/_tools/mingw810_32
+/_tools/mingw810_64
+/_tools/ninja
+/_tools/python3
+/_tools/watcom10
+/_tools/win32-cmake-3.5.2
+/_tools/win32-cmake-3.31.4
