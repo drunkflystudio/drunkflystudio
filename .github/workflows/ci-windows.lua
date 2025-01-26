@@ -15,26 +15,48 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
 
     - name: Checkout
-      uses: actions/checkout@v4
-]])
+      uses: actions/checkout@v4]])
 
 function build(name, config, command, dir)
-    local str = ([[
+    local str = ([[\n
     - name: Build with ]]..name..[[ (]]..config..[[)
       run: |
         _build\]]..command..[[\n
-    - name: Prepare artifacts for ]]..name..[[ (]]..config..[[)
-      run: |
-        attrib +h _build/]]..dir..[[/]]..config..[[/cmake
     - name: Upload artifacts for ]]..name..[[ (]]..config..[[)
       uses: actions/upload-artifact@v4
       with:
         name: ]]..name..[[ (]]..config..[[)
-        path: _build/]]..dir..[[/]]..config..[[\n
+        path: |
+          _build/]]..dir..[[/]]..config..[[\n
+          !_build/]]..dir..[[/]]..config..[[/cmake\n
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9]]):gsub("\\([n])", {n=""})
+    print(str)
+end
+
+function build_multiconfig(name, command, dir)
+    local str = ([[\n
+    - name: Build with ]]..name..[[\n
+      run: |
+        _build\]]..command..[[\n
+    - name: Upload artifacts for ]]..name..[[ (Debug)
+      uses: actions/upload-artifact@v4
+      with:
+        name: ]]..name..[[\n
+        path: _build/]]..dir..[[/Debug
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9
+    - name: Upload artifacts for ]]..name..[[ (Release)
+      uses: actions/upload-artifact@v4
+      with:
+        name: ]]..name..[[\n
+        path: _build/]]..dir..[[/Release
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9]]):gsub("\\([n])", {n=""})
@@ -90,6 +112,14 @@ build('MinGW 64-bit',
     'Release',
     'win32_mingw64_release.cmd',
     'win64/mingw')
+
+build_multiconfig('MSVC 2022 32-bit',
+    'win32_msvc2022_32.cmd',
+    'win32/msvc2022')
+
+build_multiconfig('MSVC 2022 64-bit',
+    'win32_msvc2022_64.cmd',
+    'win64/msvc2022')
 
 build('Watcom 10.0a',
     'Debug',

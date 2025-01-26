@@ -13,7 +13,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
 
     - name: Checkout
@@ -22,168 +22,207 @@ jobs:
     - name: Build with Borland C++ 4.52 (Debug)
       run: |
         _build\win32_bc45_debug.cmd
-    - name: Prepare artifacts for Borland C++ 4.52 (Debug)
-      run: |
-        attrib +h _build/win32/borlnd45/Debug/cmake
     - name: Upload artifacts for Borland C++ 4.52 (Debug)
       uses: actions/upload-artifact@v4
       with:
         name: Borland C++ 4.52 (Debug)
-        path: _build/win32/borlnd45/Debug
+        path: |
+          _build/win32/borlnd45/Debug
+          !_build/win32/borlnd45/Debug/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9
+
     - name: Build with Borland C++ 4.52 (Release)
       run: |
         _build\win32_bc45_release.cmd
-    - name: Prepare artifacts for Borland C++ 4.52 (Release)
-      run: |
-        attrib +h _build/win32/borlnd45/Release/cmake
     - name: Upload artifacts for Borland C++ 4.52 (Release)
       uses: actions/upload-artifact@v4
       with:
         name: Borland C++ 4.52 (Release)
-        path: _build/win32/borlnd45/Release
+        path: |
+          _build/win32/borlnd45/Release
+          !_build/win32/borlnd45/Release/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9
+
     - name: Build with HTML5 (Debug)
       run: |
         _build\win32_html5_debug.cmd
-    - name: Prepare artifacts for HTML5 (Debug)
-      run: |
-        attrib +h _build/html5/Debug/cmake
     - name: Upload artifacts for HTML5 (Debug)
       uses: actions/upload-artifact@v4
       with:
         name: HTML5 (Debug)
-        path: _build/html5/Debug
+        path: |
+          _build/html5/Debug
+          !_build/html5/Debug/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9
+
     - name: Build with HTML5 (Release)
       run: |
         _build\win32_html5_release.cmd
-    - name: Prepare artifacts for HTML5 (Release)
-      run: |
-        attrib +h _build/html5/Release/cmake
     - name: Upload artifacts for HTML5 (Release)
       uses: actions/upload-artifact@v4
       with:
         name: HTML5 (Release)
-        path: _build/html5/Release
+        path: |
+          _build/html5/Release
+          !_build/html5/Release/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9
+
     - name: Build with Linux 64-bit (Debug)
       run: |
         _build\win32_linux64_debug.cmd
-    - name: Prepare artifacts for Linux 64-bit (Debug)
-      run: |
-        attrib +h _build/linux64/Debug/cmake
     - name: Upload artifacts for Linux 64-bit (Debug)
       uses: actions/upload-artifact@v4
       with:
         name: Linux 64-bit (Debug)
-        path: _build/linux64/Debug
+        path: |
+          _build/linux64/Debug
+          !_build/linux64/Debug/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9
+
     - name: Build with Linux 64-bit (Release)
       run: |
         _build\win32_linux64_release.cmd
-    - name: Prepare artifacts for Linux 64-bit (Release)
-      run: |
-        attrib +h _build/linux64/Release/cmake
     - name: Upload artifacts for Linux 64-bit (Release)
       uses: actions/upload-artifact@v4
       with:
         name: Linux 64-bit (Release)
-        path: _build/linux64/Release
+        path: |
+          _build/linux64/Release
+          !_build/linux64/Release/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9
+
     - name: Build with MinGW 32-bit (Debug)
       run: |
         _build\win32_mingw32_debug.cmd
-    - name: Prepare artifacts for MinGW 32-bit (Debug)
-      run: |
-        attrib +h _build/win32/mingw/Debug/cmake
     - name: Upload artifacts for MinGW 32-bit (Debug)
       uses: actions/upload-artifact@v4
       with:
         name: MinGW 32-bit (Debug)
-        path: _build/win32/mingw/Debug
+        path: |
+          _build/win32/mingw/Debug
+          !_build/win32/mingw/Debug/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9
+
     - name: Build with MinGW 32-bit (Release)
       run: |
         _build\win32_mingw32_release.cmd
-    - name: Prepare artifacts for MinGW 32-bit (Release)
-      run: |
-        attrib +h _build/win32/mingw/Release/cmake
     - name: Upload artifacts for MinGW 32-bit (Release)
       uses: actions/upload-artifact@v4
       with:
         name: MinGW 32-bit (Release)
-        path: _build/win32/mingw/Release
+        path: |
+          _build/win32/mingw/Release
+          !_build/win32/mingw/Release/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9
+
     - name: Build with MinGW 64-bit (Debug)
       run: |
         _build\win32_mingw64_debug.cmd
-    - name: Prepare artifacts for MinGW 64-bit (Debug)
-      run: |
-        attrib +h _build/win64/mingw/Debug/cmake
     - name: Upload artifacts for MinGW 64-bit (Debug)
       uses: actions/upload-artifact@v4
       with:
         name: MinGW 64-bit (Debug)
-        path: _build/win64/mingw/Debug
+        path: |
+          _build/win64/mingw/Debug
+          !_build/win64/mingw/Debug/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9
+
     - name: Build with MinGW 64-bit (Release)
       run: |
         _build\win32_mingw64_release.cmd
-    - name: Prepare artifacts for MinGW 64-bit (Release)
-      run: |
-        attrib +h _build/win64/mingw/Release/cmake
     - name: Upload artifacts for MinGW 64-bit (Release)
       uses: actions/upload-artifact@v4
       with:
         name: MinGW 64-bit (Release)
-        path: _build/win64/mingw/Release
+        path: |
+          _build/win64/mingw/Release
+          !_build/win64/mingw/Release/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9
+
+    - name: Build with MSVC 2022 32-bit
+      run: |
+        _build\win32_msvc2022_32.cmd
+    - name: Upload artifacts for MSVC 2022 32-bit (Debug)
+      uses: actions/upload-artifact@v4
+      with:
+        name: MSVC 2022 32-bit
+        path: _build/win32/msvc2022/Debug
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9
+    - name: Upload artifacts for MSVC 2022 32-bit (Release)
+      uses: actions/upload-artifact@v4
+      with:
+        name: MSVC 2022 32-bit
+        path: _build/win32/msvc2022/Release
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9
+
+    - name: Build with MSVC 2022 64-bit
+      run: |
+        _build\win32_msvc2022_64.cmd
+    - name: Upload artifacts for MSVC 2022 64-bit (Debug)
+      uses: actions/upload-artifact@v4
+      with:
+        name: MSVC 2022 64-bit
+        path: _build/win64/msvc2022/Debug
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9
+    - name: Upload artifacts for MSVC 2022 64-bit (Release)
+      uses: actions/upload-artifact@v4
+      with:
+        name: MSVC 2022 64-bit
+        path: _build/win64/msvc2022/Release
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9
+
     - name: Build with Watcom 10.0a (Debug)
       run: |
         _build\win32_watcom10_debug.cmd
-    - name: Prepare artifacts for Watcom 10.0a (Debug)
-      run: |
-        attrib +h _build/win32/watcom10/Debug/cmake
     - name: Upload artifacts for Watcom 10.0a (Debug)
       uses: actions/upload-artifact@v4
       with:
         name: Watcom 10.0a (Debug)
-        path: _build/win32/watcom10/Debug
+        path: |
+          _build/win32/watcom10/Debug
+          !_build/win32/watcom10/Debug/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9
+
     - name: Build with Watcom 10.0a (Release)
       run: |
         _build\win32_watcom10_release.cmd
-    - name: Prepare artifacts for Watcom 10.0a (Release)
-      run: |
-        attrib +h _build/win32/watcom10/Release/cmake
     - name: Upload artifacts for Watcom 10.0a (Release)
       uses: actions/upload-artifact@v4
       with:
         name: Watcom 10.0a (Release)
-        path: _build/win32/watcom10/Release
+        path: |
+          _build/win32/watcom10/Release
+          !_build/win32/watcom10/Release/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9
