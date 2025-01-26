@@ -28,6 +28,21 @@ include(CMakeParseArguments)
 include("${BUILDTOOL_DIR}/macros.cmake")
 include("${BUILDTOOL_DIR}/dependencies.cmake")
 
+######################################################################################################################
+
+file(STRINGS "${PROJECT_DIR}/.gitmodules" lines)
+foreach(line ${lines})
+    if(line MATCHES "path = ")
+        string(REGEX REPLACE "[ \t]*path[ \t]*=[ \t]*" "" path "${line}")
+        if(NOT EXISTS "${PROJECT_DIR}/${path}/CMakeLists.txt")
+            do(git submodule update --init --recursive
+                WORKING_DIRECTORY "${PROJECT_DIR}")
+        endif()
+    endif()
+endforeach()
+
+######################################################################################################################
+
 set(buildtool_host_tools)
 
 include("${CMAKE_DIR}/projects.cmake")
@@ -41,5 +56,7 @@ foreach(dep ${deps})
     endif()
     include("${dep}")
 endforeach()
+
+######################################################################################################################
 
 include("${BUILDTOOL_DIR}/targets.cmake")
