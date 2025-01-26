@@ -14,11 +14,58 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
+
     - name: Checkout
       uses: actions/checkout@v4
+
     - name: Build with Borland C++ 4.52 (Debug)
       run: |
         _build\win32_bc45_debug.cmd
+        attrib +h _build/win32/borlnd45/Debug/cmake
+    - name: Upload Borland C++ 4.52 (Debug)
+      uses: actions/upload-artifact@v4
+      with:
+        name: Borland C++ 4.52 (Debug)
+        path: _build/win32/borlnd45/Debug
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9
+
     - name: Build with Borland C++ 4.52 (Release)
       run: |
         _build\win32_bc45_release.cmd
+        attrib +h _build/win32/borlnd45/Release/cmake
+    - name: Upload Borland C++ 4.52 (Release)
+      uses: actions/upload-artifact@v4
+      with:
+        name: Borland C++ 4.52 (Release)
+        path: _build/win32/borlnd45/Release
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9
+
+    - name: Build with MinGW 32-bit (Debug)
+      run: |
+        _build\win32_mingw32_debug.cmd
+        attrib +h _build/win32/mingw/Debug/cmake
+    - name: Upload MinGW 32-bit (Debug)
+      uses: actions/upload-artifact@v4
+      with:
+        name: MinGW 32-bit (Debug)
+        path: _build/win32/mingw/Debug
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9
+
+    - name: Build with MinGW 32-bit (Release)
+      run: |
+        _build\win32_mingw32_release.cmd
+        attrib +h _build/win32/mingw/Release/cmake
+    - name: Upload MinGW 32-bit (Release)
+      uses: actions/upload-artifact@v4
+      with:
+        name: MinGW 32-bit (Release)
+        path: _build/win32/mingw/Release
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9
