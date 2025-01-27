@@ -2,7 +2,7 @@
 print([[
 
 # This continuous integration pipeline is triggered anytime a user pushes code to the repo.
-name: Continuous Integration
+name: Continuous Integration (Windows)
 
 # Trigger on every master branch push and pull request
 on:
@@ -24,8 +24,7 @@ jobs:
 function build(name, config, command, dir)
     local str = ([[\n
     - name: Build with ]]..name..[[ (]]..config..[[)
-      run: |
-        _build\]]..command..[[\n
+      run: _build\]]..command..[[\n
     - name: Upload artifacts for ]]..name..[[ (]]..config..[[)
       uses: actions/upload-artifact@v4
       with:

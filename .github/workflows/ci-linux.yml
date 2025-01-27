@@ -1,0 +1,72 @@
+
+# This continuous integration pipeline is triggered anytime a user pushes code to the repo.
+name: Continuous Integration (Linux)
+
+# Trigger on every master branch push and pull request
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Build with Ubuntu GCC 32-bit (Debug)
+      run: _build\linux_gcc32_debug.cmd
+    - name: Upload artifacts for Ubuntu GCC 32-bit (Debug)
+      uses: actions/upload-artifact@v4
+      with:
+        name: Ubuntu GCC 32-bit (Debug)
+        path: |
+          _build/linux32/Debug
+          !_build/linux32/Debug/cmake
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9
+
+    - name: Build with Ubuntu GCC 32-bit (Release)
+      run: _build\linux_gcc32_release.cmd
+    - name: Upload artifacts for Ubuntu GCC 32-bit (Release)
+      uses: actions/upload-artifact@v4
+      with:
+        name: Ubuntu GCC 32-bit (Release)
+        path: |
+          _build/linux32/Release
+          !_build/linux32/Release/cmake
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9
+
+    - name: Build with Ubuntu GCC 64-bit (Debug)
+      run: _build\linux_gcc64_debug.cmd
+    - name: Upload artifacts for Ubuntu GCC 64-bit (Debug)
+      uses: actions/upload-artifact@v4
+      with:
+        name: Ubuntu GCC 64-bit (Debug)
+        path: |
+          _build/linux64/Debug
+          !_build/linux64/Debug/cmake
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9
+
+    - name: Build with Ubuntu GCC 64-bit (Release)
+      run: _build\linux_gcc64_release.cmd
+    - name: Upload artifacts for Ubuntu GCC 64-bit (Release)
+      uses: actions/upload-artifact@v4
+      with:
+        name: Ubuntu GCC 64-bit (Release)
+        path: |
+          _build/linux64/Release
+          !_build/linux64/Release/cmake
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9

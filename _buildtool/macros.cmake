@@ -30,6 +30,22 @@ endmacro()
 
 ######################################################################################################################
 
+macro(require_linux_host what)
+    if(NOT CMAKE_HOST_SYSTEM_NAME MATCHES Linux)
+        message(FATAL_ERROR "${what} requires Linux host.")
+    endif()
+endmacro()
+
+######################################################################################################################
+
+macro(require_linux_or_win32_host what)
+    if(NOT WIN32 AND NOT CMAKE_HOST_SYSTEM_NAME MATCHES Linux)
+        message(FATAL_ERROR "${what} requires Linux or Win32 host.")
+    endif()
+endmacro()
+
+######################################################################################################################
+
 macro(add_PATH path)
     if(WIN32)
         set(ENV{PATH} "${path};$ENV{PATH}")
@@ -82,7 +98,7 @@ endmacro()
 
 macro(generate_project)
     set(options)
-    set(one DIRECTORY GENERATOR TOOLCHAIN BUILD_TYPE SOURCES)
+    set(one DIRECTORY GENERATOR TOOLCHAIN BUILD_TYPE SOURCES CC CXX)
     set(multi OPTIONS)
     cmake_parse_arguments(gp "${options}" "${one}" "${multi}" ${ARGN})
 
@@ -150,9 +166,42 @@ macro(generate_project)
             endforeach()
         endif()
 
+        if(gp_CC)
+            if(ENV{CC})
+                set(oldCC "$ENV{CC}")
+            else()
+                unset(oldCC)
+            endif()
+            set(ENV{CC} "${gp_CC}")
+        endif()
+
+        if(gp_CXX)
+            if(ENV{CXX})
+                set(oldCXX "$ENV{CXX}")
+            else()
+                unset(oldCXX)
+            endif()
+            set(ENV{CXX} "${gp_CXX}")
+        endif()
+
         do("${CMAKE_COMMAND}" --no-warn-unused-cli ${args} "${gp_SOURCES}"
             WORKING_DIRECTORY "${BUILD_DIR}/${gp_DIRECTORY}/cmake")
         file(WRITE "${generated_marker}" "")
+
+        if(gp_CC)
+            if(oldCC)
+                set(ENV{CC} "${oldCC}")
+            else()
+                unset(ENV{CC})
+            endif()
+        endif()
+        if(gp_CXX)
+            if(oldCXX)
+                set(ENV{CXX} "${oldCXX}")
+            else()
+                unset(ENV{CXX})
+            endif()
+        endif()
     endif()
 endmacro()
 

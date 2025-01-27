@@ -100,7 +100,27 @@ endif()
 
 ######################################################################################################################
 
+if(LINUX32)
+    require_linux_host("LINUX32")
+    get_build_types(build_types "${LINUX32}")
+    foreach(build_type ${build_types})
+        set(dir "linux32/${build_type}")
+        generate_project(
+            DIRECTORY "${dir}"
+            BUILD_TYPE "${build_type}"
+            CC "gcc -m32"
+            CXX "g++ -m32"
+            )
+        build_project(
+            DIRECTORY "${dir}"
+            )
+    endforeach()
+endif()
+
+######################################################################################################################
+
 if(LINUX64)
+    require_linux_or_win32_host("LINUX64")
     get_build_types(build_types "${LINUX64}")
     if(WIN32)
         require_clang350_linux64()
@@ -116,7 +136,18 @@ if(LINUX64)
                 )
         endforeach()
     else()
-        # FIXME
+        foreach(build_type ${build_types})
+            set(dir "linux64/${build_type}")
+            generate_project(
+                DIRECTORY "${dir}"
+                BUILD_TYPE "${build_type}"
+                CC "gcc -m64"
+                CXX "g++ -m64"
+                )
+            build_project(
+                DIRECTORY "${dir}"
+                )
+        endforeach()
     endif()
 endif()
 
