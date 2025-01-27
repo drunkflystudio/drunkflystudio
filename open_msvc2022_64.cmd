@@ -1,6 +1,7 @@
 @echo off
-cd /D "%~dp0" || exit /B 1
-if exist "%~dp0_build\win64\msvc2022\cmake\Studio.sln" goto exist
-call "%~dp0_tools\cmake-3.31.4.cmd" -DMSVC2022_64=generate-only -P "%~dp0_buildtool/buildtool.cmake" || exit /B 1
+set dir=%~dp0
+cd /D "%dir%" || exit /B 1
+if exist "%dir%_build\win64\msvc2022\cmake\Studio.sln" goto exist
+call "%dir%_tools\cmake-3.31.4.cmd" -DMSVC2022_64=generate-only -P "%dir%_buildtool/buildtool.cmake" || exit /B 1
 :exist
-start %~dp0_build\win64\msvc2022\cmake\Studio.sln || exit /B 1
+start %dir%_build\win64\msvc2022\cmake\Studio.sln || exit /B 1

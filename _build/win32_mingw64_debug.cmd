@@ -1,4 +1,5 @@
 @echo off
-cd /D "%~dp0.." || exit /B 1
-call "%~dp0..\_tools\cmake-3.5.2.cmd" -DMINGW810_64=debug -P "%~dp0../_buildtool/buildtool.cmake" || exit /B 1
+set dir=%~dp0
+cd /D "%dir%.." || exit /B 1
+call "%dir%..\_tools\cmake-3.5.2.cmd" -DMINGW810_64=debug -P "%dir%../_buildtool/buildtool.cmake" || exit /B 1
 echo == SUCCESS! ==
