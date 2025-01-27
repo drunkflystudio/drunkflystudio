@@ -24,7 +24,7 @@ jobs:
 function build(name, config, command, dir)
     local str = ([[\n
     - name: Build with ]]..name..[[ (]]..config..[[)
-      run: _build\]]..command..[[\n
+      run: _build/]]..command..[[\n
     - name: Upload artifacts for ]]..name..[[ (]]..config..[[)
       uses: actions/upload-artifact@v4
       with:
@@ -40,20 +40,20 @@ end
 
 build('Ubuntu GCC 32-bit',
     'Debug',
-    'linux_gcc32_debug.cmd',
+    'linux_gcc32_debug.sh',
     'linux32')
 
 build('Ubuntu GCC 32-bit',
     'Release',
-    'linux_gcc32_release.cmd',
+    'linux_gcc32_release.sh',
     'linux32')
 
 build('Ubuntu GCC 64-bit',
     'Debug',
-    'linux_gcc64_debug.cmd',
+    'linux_gcc64_debug.sh',
     'linux64')
 
 build('Ubuntu GCC 64-bit',
     'Release',
-    'linux_gcc64_release.cmd',
+    'linux_gcc64_release.sh',
     'linux64')

@@ -20,7 +20,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Build with Ubuntu GCC 32-bit (Debug)
-      run: _build\linux_gcc32_debug.cmd
+      run: _build/linux_gcc32_debug.sh
     - name: Upload artifacts for Ubuntu GCC 32-bit (Debug)
       uses: actions/upload-artifact@v4
       with:
@@ -33,7 +33,7 @@ jobs:
         compression-level: 9
 
     - name: Build with Ubuntu GCC 32-bit (Release)
-      run: _build\linux_gcc32_release.cmd
+      run: _build/linux_gcc32_release.sh
     - name: Upload artifacts for Ubuntu GCC 32-bit (Release)
       uses: actions/upload-artifact@v4
       with:
@@ -46,7 +46,7 @@ jobs:
         compression-level: 9
 
     - name: Build with Ubuntu GCC 64-bit (Debug)
-      run: _build\linux_gcc64_debug.cmd
+      run: _build/linux_gcc64_debug.sh
     - name: Upload artifacts for Ubuntu GCC 64-bit (Debug)
       uses: actions/upload-artifact@v4
       with:
@@ -59,7 +59,7 @@ jobs:
         compression-level: 9
 
     - name: Build with Ubuntu GCC 64-bit (Release)
-      run: _build\linux_gcc64_release.cmd
+      run: _build/linux_gcc64_release.sh
     - name: Upload artifacts for Ubuntu GCC 64-bit (Release)
       uses: actions/upload-artifact@v4
       with:
