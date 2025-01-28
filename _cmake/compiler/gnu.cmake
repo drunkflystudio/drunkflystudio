@@ -4,13 +4,13 @@ add_compiler_flag(-fvisibility=hidden)
 add_compiler_flag(-fdata-sections)
 add_compiler_flag(-ffunction-sections)
 
-if(CMAKE_COMPILER_IS_GNUCC)
-    add_compiler_flag(-fno-plt)
-endif()
-
 add_linker_flag_release(-O)
 add_linker_flag_release_only(-s)
-add_linker_flag_release_only(-static-libgcc)
+
+if(CMAKE_COMPILER_IS_GNUCC)
+    add_compiler_flag(-fno-plt)
+    add_linker_flag_release_only(-static-libgcc)
+endif()
 
 macro(enable_warnings)
     add_compiler_flag(-Werror)

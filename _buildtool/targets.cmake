@@ -153,6 +153,28 @@ endif()
 
 ######################################################################################################################
 
+if(XCODE)
+    require_macosx_host("XCODE")
+    set(dir "macosx/xcode")
+    generate_project(
+        DIRECTORY "${dir}"
+        GENERATOR "Xcode"
+        OSX_ARCHITECTURES "x86_64;arm64"
+        )
+    if(NOT XCODE STREQUAL "generate-only")
+        get_build_types(build_types "${XCODE}")
+        foreach(build_type ${build_types})
+            build_project(
+                DIRECTORY "${dir}"
+                BUILD_TYPE "${build_type}"
+                PARALLEL
+                )
+        endforeach()
+    endif()
+endif()
+
+######################################################################################################################
+
 if(HTML5)
     require_emscripten("3.1.50")
     get_build_types(build_types "${HTML5}")

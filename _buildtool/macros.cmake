@@ -46,6 +46,14 @@ endmacro()
 
 ######################################################################################################################
 
+macro(require_macosx_host what)
+    if(NOT APPLE)
+        message(FATAL_ERROR "${what} requires MacOS X host.")
+    endif()
+endmacro()
+
+######################################################################################################################
+
 macro(add_PATH path)
     if(WIN32)
         set(ENV{PATH} "${path};$ENV{PATH}")
@@ -98,7 +106,7 @@ endmacro()
 
 macro(generate_project)
     set(options)
-    set(one DIRECTORY GENERATOR TOOLCHAIN BUILD_TYPE SOURCES CC CXX)
+    set(one DIRECTORY GENERATOR TOOLCHAIN BUILD_TYPE SOURCES CC CXX OSX_ARCHITECTURES)
     set(multi OPTIONS)
     cmake_parse_arguments(gp "${options}" "${one}" "${multi}" ${ARGN})
 
@@ -118,7 +126,11 @@ macro(generate_project)
         set(args)
 
         if(NOT gp_GENERATOR)
-            set(generator Ninja)
+            if(APPLE)
+                set(generator Xcode)
+            else()
+                set(generator Ninja)
+            endif()
         elseif(NOT "${gp_GENERATOR}" STREQUAL "Makefiles")
             set(generator "${gp_GENERATOR}")
         else()
@@ -164,6 +176,10 @@ macro(generate_project)
             foreach(opt ${gp_OPTIONS})
                 list(APPEND args "-D${opt}")
             endforeach()
+        endif()
+
+        if(gp_OSX_ARCHITECTURES)
+            list(APPEND args "-DCMAKE_OSX_ARCHITECTURES=${gp_OSX_ARCHITECTURES}")
         endif()
 
         if(gp_CC)
@@ -249,12 +265,16 @@ macro(build_host_tool name)
         message(FATAL_ERROR "build_host_tool: directory not specified!")
     endif()
 
-    require_ninja()
-    if(WIN32)
-        require_mingw810_32()
+    if(APPLE)
+        set(dir "_host_/${name}")
+    else()
+        require_ninja()
+        if(WIN32)
+            require_mingw810_32()
+        endif()
+        set(dir "_host_/${name}/Release")
     endif()
 
-    set(dir "_host_/${name}/Release")
     generate_project(
         DIRECTORY "${dir}"
         SOURCES "${bht_DIRECTORY}"
@@ -273,18 +293,24 @@ macro(build_host_tool name)
     if(NOT bht_TARGETS)
         build_project(
             DIRECTORY "${dir}"
+            BUILD_TYPE "Release"
             )
     else()
         build_project(
             DIRECTORY "${dir}"
+            BUILD_TYPE "Release"
             TARGETS ${bht_TARGETS}
             )
     endif()
 
     foreach(exename ${bht_EXECUTABLES})
-        set(exe "${BUILD_DIR}/${dir}/${exename}")
-        if(WIN32)
-            set(exe "${exe}.exe")
+        if(APPLE)
+            set(exe "${BUILD_DIR}/${dir}/Release/${exename}")
+        else()
+            set(exe "${BUILD_DIR}/${dir}/${exename}")
+            if(WIN32)
+                set(exe "${exe}.exe")
+            endif()
         endif()
         if(NOT EXISTS "${exe}")
             message(FATAL_ERROR "build_host_tool: file \"${exe}\" does not exist.")
