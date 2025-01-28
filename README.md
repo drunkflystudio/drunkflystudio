@@ -24,3 +24,14 @@ Run `build_linux_all.sh` to build executables for all supported targets.
 Optionally, run one of the `linux_*.sh` files in the `_build` directory to build for a specified target.
 
 Built executables will be placed in the `_build` directory.
+
+Building on MacOS
+-----------------
+
+Run `build_macos_all.sh` to build executables for all supported targets.
+
+Optionally, run one of the `macos_*.sh` files in the `_build` directory to build for a specified target.
+
+Built executables will be placed in the `_build` directory.
+
+Also you can run `open_xcode.sh` script to open project in Xcode.
