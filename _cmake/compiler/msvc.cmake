@@ -15,6 +15,9 @@ add_linker_flag_release(/LTCG)      # link-time code generation
 remove_linker_flag("/INCREMENTAL(:NO)?")
 add_linker_flag_release(/INCREMENTAL:NO)
 
+remove_linker_flag("/MANIFEST")
+add_linker_flag(/MANIFEST:NO)
+
 add_linker_flag_release(/OPT:REF)
 add_linker_flag_release(/OPT:ICF=20)
 
