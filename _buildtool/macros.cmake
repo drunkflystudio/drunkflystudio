@@ -265,12 +265,17 @@ macro(build_host_tool name)
         message(FATAL_ERROR "build_host_tool: directory not specified!")
     endif()
 
+    set(flags)
     if(APPLE)
         set(dir "_host_/${name}")
     else()
         require_ninja()
         if(WIN32)
-            require_mingw810_32()
+            require_mingw440_32()
+            set(flags
+                CC "${TOOLS_DIR}/mingw440_32/bin/gcc.exe"
+                CXX "${TOOLS_DIR}/mingw440_32/bin/g++.exe"
+                )
         endif()
         set(dir "_host_/${name}/Release")
     endif()
@@ -280,6 +285,7 @@ macro(build_host_tool name)
         SOURCES "${bht_DIRECTORY}"
         BUILD_TYPE "Release"
         OPTIONS ${bht_OPTIONS}
+        ${flags}
         )
 
     if(NOT bht_EXECUTABLES)

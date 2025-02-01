@@ -92,25 +92,35 @@ build('Linux 64-bit',
     'win32_linux64_release.cmd',
     'linux64')
 
-build('MinGW 32-bit',
+build('MinGW 4.4.0 32-bit',
     'Debug',
-    'win32_mingw32_debug.cmd',
-    'win32/mingw')
+    'win32_mingw32_440_debug.cmd',
+    'win32/mingw440')
 
-build('MinGW 32-bit',
+build('MinGW 4.4.0 32-bit',
     'Release',
-    'win32_mingw32_release.cmd',
-    'win32/mingw')
+    'win32_mingw32_440_release.cmd',
+    'win32/mingw440')
 
-build('MinGW 64-bit',
+build('MinGW 8.1.0 32-bit',
     'Debug',
-    'win32_mingw64_debug.cmd',
-    'win64/mingw')
+    'win32_mingw32_810_debug.cmd',
+    'win32/mingw810')
 
-build('MinGW 64-bit',
+build('MinGW 8.1.0 32-bit',
     'Release',
-    'win32_mingw64_release.cmd',
-    'win64/mingw')
+    'win32_mingw32_810_release.cmd',
+    'win32/mingw810')
+
+build('MinGW 8.1.0 64-bit',
+    'Debug',
+    'win32_mingw64_810_debug.cmd',
+    'win64/mingw810')
+
+build('MinGW 8.1.0 64-bit',
+    'Release',
+    'win32_mingw64_810_release.cmd',
+    'win64/mingw810')
 
 build_multiconfig('MSVC 2022 32-bit',
     'win32_msvc2022_32.cmd',

@@ -104,7 +104,17 @@ macro(require_watcom10)
 endmacro()
 
 ######################################################################################################################
-# MinGW 8.10 32-bit
+# MinGW 4.4.0 32-bit
+
+macro(require_mingw440_32)
+    external_git_repo("${TOOLS_DIR}/mingw440_32" "https://github.com/thirdpartystuff/win32-mingw440-32")
+    if(WIN32)
+        add_PATH("${TOOLS_DIR}/mingw440_32/bin")
+    endif()
+endmacro()
+
+######################################################################################################################
+# MinGW 8.1.0 32-bit
 
 macro(require_mingw810_32)
     external_git_repo("${TOOLS_DIR}/mingw810_32" "https://github.com/thirdpartystuff/win32-mingw810-32")
@@ -114,7 +124,7 @@ macro(require_mingw810_32)
 endmacro()
 
 ######################################################################################################################
-# MinGW 8.10 64-bit
+# MinGW 8.1.0 64-bit
 
 macro(require_mingw810_64)
     external_git_repo("${TOOLS_DIR}/mingw810_64" "https://github.com/thirdpartystuff/win32-mingw810-64")

@@ -97,54 +97,80 @@ jobs:
         include-hidden-files: false
         compression-level: 9
 
-    - name: Build with MinGW 32-bit (Debug)
-      run: _build\win32_mingw32_debug.cmd
-    - name: Upload artifacts for MinGW 32-bit (Debug)
+    - name: Build with MinGW 4.4.0 32-bit (Debug)
+      run: _build\win32_mingw32_440_debug.cmd
+    - name: Upload artifacts for MinGW 4.4.0 32-bit (Debug)
       uses: actions/upload-artifact@v4
       with:
-        name: MinGW 32-bit (Debug)
+        name: MinGW 4.4.0 32-bit (Debug)
         path: |
-          _build/win32/mingw/Debug
-          !_build/win32/mingw/Debug/cmake
+          _build/win32/mingw440/Debug
+          !_build/win32/mingw440/Debug/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9
 
-    - name: Build with MinGW 32-bit (Release)
-      run: _build\win32_mingw32_release.cmd
-    - name: Upload artifacts for MinGW 32-bit (Release)
+    - name: Build with MinGW 4.4.0 32-bit (Release)
+      run: _build\win32_mingw32_440_release.cmd
+    - name: Upload artifacts for MinGW 4.4.0 32-bit (Release)
       uses: actions/upload-artifact@v4
       with:
-        name: MinGW 32-bit (Release)
+        name: MinGW 4.4.0 32-bit (Release)
         path: |
-          _build/win32/mingw/Release
-          !_build/win32/mingw/Release/cmake
+          _build/win32/mingw440/Release
+          !_build/win32/mingw440/Release/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9
 
-    - name: Build with MinGW 64-bit (Debug)
-      run: _build\win32_mingw64_debug.cmd
-    - name: Upload artifacts for MinGW 64-bit (Debug)
+    - name: Build with MinGW 8.1.0 32-bit (Debug)
+      run: _build\win32_mingw32_810_debug.cmd
+    - name: Upload artifacts for MinGW 8.1.0 32-bit (Debug)
       uses: actions/upload-artifact@v4
       with:
-        name: MinGW 64-bit (Debug)
+        name: MinGW 8.1.0 32-bit (Debug)
         path: |
-          _build/win64/mingw/Debug
-          !_build/win64/mingw/Debug/cmake
+          _build/win32/mingw810/Debug
+          !_build/win32/mingw810/Debug/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9
 
-    - name: Build with MinGW 64-bit (Release)
-      run: _build\win32_mingw64_release.cmd
-    - name: Upload artifacts for MinGW 64-bit (Release)
+    - name: Build with MinGW 8.1.0 32-bit (Release)
+      run: _build\win32_mingw32_810_release.cmd
+    - name: Upload artifacts for MinGW 8.1.0 32-bit (Release)
       uses: actions/upload-artifact@v4
       with:
-        name: MinGW 64-bit (Release)
+        name: MinGW 8.1.0 32-bit (Release)
         path: |
-          _build/win64/mingw/Release
-          !_build/win64/mingw/Release/cmake
+          _build/win32/mingw810/Release
+          !_build/win32/mingw810/Release/cmake
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9
+
+    - name: Build with MinGW 8.1.0 64-bit (Debug)
+      run: _build\win32_mingw64_810_debug.cmd
+    - name: Upload artifacts for MinGW 8.1.0 64-bit (Debug)
+      uses: actions/upload-artifact@v4
+      with:
+        name: MinGW 8.1.0 64-bit (Debug)
+        path: |
+          _build/win64/mingw810/Debug
+          !_build/win64/mingw810/Debug/cmake
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9
+
+    - name: Build with MinGW 8.1.0 64-bit (Release)
+      run: _build\win32_mingw64_810_release.cmd
+    - name: Upload artifacts for MinGW 8.1.0 64-bit (Release)
+      uses: actions/upload-artifact@v4
+      with:
+        name: MinGW 8.1.0 64-bit (Release)
+        path: |
+          _build/win64/mingw810/Release
+          !_build/win64/mingw810/Release/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9

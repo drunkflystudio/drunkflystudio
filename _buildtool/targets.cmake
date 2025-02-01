@@ -20,15 +20,37 @@ endif()
 
 ######################################################################################################################
 
+if(MINGW440_32)
+    require_win32_host("MINGW440_32")
+    require_mingw440_32()
+    get_build_types(build_types "${MINGW440_32}")
+    foreach(build_type ${build_types})
+        set(dir "win32/mingw440/${build_type}")
+        generate_project(
+            DIRECTORY "${dir}"
+            BUILD_TYPE "${build_type}"
+            CC "${TOOLS_DIR}/mingw440_32/bin/gcc.exe"
+            CXX "${TOOLS_DIR}/mingw440_32/bin/g++.exe"
+            )
+        build_project(
+            DIRECTORY "${dir}"
+            )
+    endforeach()
+endif()
+
+######################################################################################################################
+
 if(MINGW810_32)
     require_win32_host("MINGW810_32")
     require_mingw810_32()
     get_build_types(build_types "${MINGW810_32}")
     foreach(build_type ${build_types})
-        set(dir "win32/mingw/${build_type}")
+        set(dir "win32/mingw810/${build_type}")
         generate_project(
             DIRECTORY "${dir}"
             BUILD_TYPE "${build_type}"
+            CC "${TOOLS_DIR}/mingw810_32/bin/gcc.exe"
+            CXX "${TOOLS_DIR}/mingw810_32/bin/g++.exe"
             )
         build_project(
             DIRECTORY "${dir}"
@@ -43,10 +65,12 @@ if(MINGW810_64)
     require_mingw810_64()
     get_build_types(build_types "${MINGW810_64}")
     foreach(build_type ${build_types})
-        set(dir "win64/mingw/${build_type}")
+        set(dir "win64/mingw810/${build_type}")
         generate_project(
             DIRECTORY "${dir}"
             BUILD_TYPE "${build_type}"
+            CC "${TOOLS_DIR}/mingw810_64/bin/gcc.exe"
+            CXX "${TOOLS_DIR}/mingw810_64/bin/g++.exe"
             )
         build_project(
             DIRECTORY "${dir}"

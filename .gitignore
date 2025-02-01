@@ -10,6 +10,7 @@
 /_tools/emsdk
 /_tools/gnuwin32
 /_tools/mingw32_make
+/_tools/mingw440_32
 /_tools/mingw810_32
 /_tools/mingw810_64
 /_tools/ninja
