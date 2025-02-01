@@ -8,8 +8,8 @@ else
     distrib=unknown
 fi
 
-if [ "$distrib" = "ubuntu" -o "$distrib" = "linuxmint" ]; then
-    echo "Building on Ubuntu variant ($distrib)"
+if [ "$distrib" = "ubuntu" -o "$distrib" = "linuxmint" -o "$distrib" = "debian" ]; then
+    echo "Building on Linux variant ($distrib)"
 
     dpkg -l | grep gcc-multilib >/dev/null 2>&1
     if [ "$?" != 0 ]; then
