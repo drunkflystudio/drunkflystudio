@@ -117,7 +117,7 @@ macro(enable_warnings)
     add_compiler_flag(-wrlo FORCE)          #+ returning pointer to a local object
     add_compiler_flag(-wsig FORCE)          # conversion may lose significant digits
     add_compiler_flag(-wspa FORCE)          #+ suspicious pointer arithmetic
-    add_compiler_flag(-wstu FORCE)          #+ undefined structure
+   #add_compiler_flag(-wstu FORCE)          # undefined structure ==> PRACTICALLY USELESS
     add_compiler_flag(-wstv FORCE)          # structure passed by value
     add_compiler_flag(-wsus FORCE)          # suspicious pointer conversion
     add_compiler_flag(-wstl FORCE)          #+ operator must be publicly visible / iterator required
