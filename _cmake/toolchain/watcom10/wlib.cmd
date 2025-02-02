@@ -1,5 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
+set PATH=%~dp0..\..\..\_tools\watcom10\binnt;%PATH%
 set dp0=%~dp0
 set args=
 :loop

@@ -1,5 +1,6 @@
 @echo off
 setlocal disabledelayedexpansion
+set PATH=%~dp0..\..\..\_tools\borland45\bin;%PATH%
 if exist bcc32-failed del bcc32-failed
 ("%~dp0..\..\..\_tools\borland45\bin\bcc32" %* || echo 1 > bcc32-failed) ^
     | "%~dp0..\..\..\_tools\gnuwin32\grep" ^

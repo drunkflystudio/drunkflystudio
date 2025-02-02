@@ -8,6 +8,7 @@ for %%i in (!WATCOM!) do set WATCOM=%%~dpi
 set WATCOM=!WATCOM:~0,-1!
 for %%i in (!WATCOM!) do set WATCOM=%%~dpi
 set WATCOM=!WATCOM:~0,-1!\_tools\watcom10
+set PATH=%WATCOM%\binnt;%PATH%
 set args=
 :loop
 if "%~1"=="" goto end

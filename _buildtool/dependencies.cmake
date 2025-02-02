@@ -21,11 +21,9 @@ endif()
 if(WIN32)
     macro(require_ninja)
         external_git_repo("${TOOLS_DIR}/ninja" "https://github.com/thirdpartystuff/win32-ninja")
-        add_PATH("${TOOLS_DIR}/ninja")
     endmacro()
 else()
     macro(require_ninja)
-        # FIXME
     endmacro()
 endif()
 
@@ -34,9 +32,6 @@ endif()
 
 macro(require_mingw32_make)
     external_git_repo("${TOOLS_DIR}/mingw32_make" "https://github.com/thirdpartystuff/win32-mingw32-make")
-    if(WIN32)
-        add_PATH("${TOOLS_DIR}/mingw32_make")
-    endif()
 endmacro()
 
 ######################################################################################################################
@@ -49,7 +44,6 @@ if(WIN32)
     endmacro()
 else()
     macro(require_python3)
-        # FIXME
     endmacro()
 endif()
 
@@ -84,9 +78,6 @@ endmacro()
 
 macro(require_borland_4_5)
     external_git_repo("${TOOLS_DIR}/borland45" "https://github.com/thirdpartystuff/win32-borland452")
-    if(WIN32)
-        add_PATH("${TOOLS_DIR}/borland45/bin")
-    endif()
 endmacro()
 
 ######################################################################################################################
@@ -98,9 +89,6 @@ macro(require_watcom10)
         message(FATAL_ERROR "\n=== Watcom 10.0a is unable to handle such long path: ===\n\"${TOOLS_DIR}/watcom10\"\n")
     endif()
     external_git_repo("${TOOLS_DIR}/watcom10" "https://github.com/thirdpartystuff/win32-watcom10")
-    if(WIN32)
-        add_PATH("${TOOLS_DIR}/watcom10/binnt")
-    endif()
 endmacro()
 
 ######################################################################################################################
@@ -108,9 +96,6 @@ endmacro()
 
 macro(require_mingw440_32)
     external_git_repo("${TOOLS_DIR}/mingw440_32" "https://github.com/thirdpartystuff/win32-mingw440-32")
-    if(WIN32)
-        add_PATH("${TOOLS_DIR}/mingw440_32/bin")
-    endif()
 endmacro()
 
 ######################################################################################################################
@@ -118,9 +103,6 @@ endmacro()
 
 macro(require_mingw810_32)
     external_git_repo("${TOOLS_DIR}/mingw810_32" "https://github.com/thirdpartystuff/win32-mingw810-32")
-    if(WIN32)
-        add_PATH("${TOOLS_DIR}/mingw810_32/bin")
-    endif()
 endmacro()
 
 ######################################################################################################################
@@ -128,9 +110,6 @@ endmacro()
 
 macro(require_mingw810_64)
     external_git_repo("${TOOLS_DIR}/mingw810_64" "https://github.com/thirdpartystuff/win32-mingw810-64")
-    if(WIN32)
-        add_PATH("${TOOLS_DIR}/mingw810_64/bin")
-    endif()
 endmacro()
 
 ######################################################################################################################
@@ -138,7 +117,4 @@ endmacro()
 
 macro(require_clang350_linux64)
     external_git_repo("${TOOLS_DIR}/clang350_linux64" "https://github.com/thirdpartystuff/win32-clang350-linux64")
-    if(WIN32)
-        add_PATH("${TOOLS_DIR}/clang350_linux64/bin")
-    endif()
 endmacro()
