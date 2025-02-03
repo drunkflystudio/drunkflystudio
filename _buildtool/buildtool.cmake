@@ -23,6 +23,14 @@ set(TOOLS_DIR "${PROJECT_DIR}/_tools")
 
 ######################################################################################################################
 
+if(WIN32)
+    execute_process(COMMAND "${TOOLS_DIR}/winver/winver.exe" OUTPUT_VARIABLE winver)
+    list(GET winver 0 WINDOWS_VERSION_MAJOR)
+    list(GET winver 1 WINDOWS_VERSION_MINOR)
+endif()
+
+######################################################################################################################
+
 include(CMakeParseArguments)
 
 include("${BUILDTOOL_DIR}/macros.cmake")
