@@ -13,7 +13,7 @@ if(CMAKE_COMPILER_IS_GNUCC)
 endif()
 
 macro(enable_warnings)
-    add_compiler_flag(-Werror)
+    add_compiler_flag_release(-Werror)
     add_compiler_flag(-ansi)
     add_compiler_flag(-pedantic)
     add_compiler_flag(-Wall)
