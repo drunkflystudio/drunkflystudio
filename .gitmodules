@@ -1,6 +1,8 @@
 [submodule "base-common"]
 	path = base-common
 	url = https://github.com/drunkflystudio/base-common
+	branch = master
 [submodule "base-compiler"]
 	path = base-compiler
 	url = https://github.com/drunkflystudio/base-compiler
+	branch = master
