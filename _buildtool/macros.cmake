@@ -106,7 +106,7 @@ endmacro()
 
 macro(generate_project)
     set(options)
-    set(one DIRECTORY GENERATOR TOOLCHAIN BUILD_TYPE SOURCES CC CXX OSX_ARCHITECTURES)
+    set(one DIRECTORY GENERATOR ARCHITECTURE TOOLCHAIN BUILD_TYPE SOURCES CC CXX OSX_ARCHITECTURES)
     set(multi OPTIONS)
     cmake_parse_arguments(gp "${options}" "${one}" "${multi}" ${ARGN})
 
