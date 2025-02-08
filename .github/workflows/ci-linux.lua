@@ -15,7 +15,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
 
     - name: Checkout
@@ -24,7 +24,7 @@ jobs:
 function build(name, config, command, dir)
     local str = ([[\n
     - name: Build with ]]..name..[[ (]]..config..[[)
-      run: _build/]]..command..[[\n
+      run: sudo apt-get update && _build/]]..command..[[\n
     - name: Upload artifacts for ]]..name..[[ (]]..config..[[)
       uses: actions/upload-artifact@v4
       with:
