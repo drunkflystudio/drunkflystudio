@@ -17,8 +17,8 @@ Drunk Fly Studio
 
 ___
 
-[!CAUTION]
-This project is under active development and has not yet reached any usable state.
+> [!CAUTION]
+> This project is under active development and has not yet reached any usable state.
 ___
 
 Building from source
