@@ -27,7 +27,7 @@ jobs:
             run_suffix: cmd
             run: _build\win32_html5
             dir: _build/html5
-          - name: Linux 64-bit cross-compiled from Windows
+          - name: Linux 64-bit cross-compiler
             builder: windows-2022
             run_suffix: cmd
             run: _build\win32_linux64
@@ -77,29 +77,44 @@ jobs:
             run_suffix: sh
             run: _build/macos_xcode
             dir: _build/macos
-        config:
-          - name: Debug
-            locase: debug
-          - name: Release
-            locase: release
 
-    name: ${{ matrix.target.name }} (${{ matrix.config.name }})
+    name: ${{ matrix.target.name }}
     runs-on: ${{ matrix.target.builder }}
 
     steps:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Build with ${{ matrix.target.name }} (${{ matrix.config.name }})
-      run: ${{ matrix.target.run }}_${{ matrix.config.locase }}.${{ matrix.target.run_suffix }}
+    - name: Build with ${{ matrix.target.name }} (Debug)
+      run: ${{ matrix.target.run }}_debu.${{ matrix.target.run_suffix }}
+      id: debug
+      if: ${{ !cancelled() }}
 
-    - name: Upload artifacts for ${{ matrix.target.name }} (${{ matrix.config.name }})
+    - name: Build with ${{ matrix.target.name }} (Release)
+      run: ${{ matrix.target.run }}_release.${{ matrix.target.run_suffix }}
+      id: release
+      if: ${{ !cancelled() }}
+
+    - name: Upload artifacts for ${{ matrix.target.name }} (Debug)
       uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() && steps.debug.conclusion == 'success' }}
       with:
-        name: ${{ matrix.target.name }} (${{ matrix.config.name }})
+        name: ${{ matrix.target.name }} (Debug)
         path: |
-          ${{ matrix.target.dir }}/${{ matrix.config.name }}
-          !${{ matrix.target.dir }}/${{ matrix.config.name }}/cmake
+          ${{ matrix.target.dir }}/Debug
+          !${{ matrix.target.dir }}/Debug/cmake
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9
+
+    - name: Upload artifacts for ${{ matrix.target.name }} (Release)
+      uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() && steps.release.conclusion == 'success' }}
+      with:
+        name: ${{ matrix.target.name }} (Release)
+        path: |
+          ${{ matrix.target.dir }}/Release
+          !${{ matrix.target.dir }}/Release/cmake
         if-no-files-found: error
         include-hidden-files: false
         compression-level: 9
