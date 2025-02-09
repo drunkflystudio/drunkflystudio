@@ -4,12 +4,12 @@ Drunk Fly Studio
 
 [![CI/CD](https://github.com/drunkflystudio/drunkflystudio/actions/workflows/ci.yml/badge.svg)](https://github.com/drunkflystudio/drunkflystudio/actions/workflows/ci.yml)
 [![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fdrunkflystudio%2Fdrunkflystudio&countColor=%230c7ebe&style=flat&labelStyle=none)](https://visitorbadge.io/status?path=https%3A%2F%2Fgithub.com%2Fdrunkflystudio%2Fdrunkflystudio)
-[![YouTube](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)](https://youtube.com/drunkfly)
+[![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?logo=YouTube&logoColor=white)](https://youtube.com/drunkfly)
 
-![Windows badge](https://custom-icon-badges.demolab.com/badge/Windows-0078D6?logo=windows11&logoColor=white)
-![MacOS badge](https://img.shields.io/badge/macOS-000000?style=flat&logo=apple&logoColor=white)
-![Ubuntu badge](https://img.shields.io/badge/Ubuntu-E95420?style=flat&logo=ubuntu&logoColor=white)
-![HTML5 badge](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+[![Windows badge](https://custom-icon-badges.demolab.com/badge/Windows-0078D6?logo=windows11&logoColor=white)](#)
+[![Linux badge](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black)](#)
+[![MacOS badge](https://img.shields.io/badge/macOS-000000?style=flat&logo=apple&logoColor=white)](#)
+[![HTML5 badge](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)](#)
 
 Building on Windows
 -------------------
