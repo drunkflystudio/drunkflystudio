@@ -14,12 +14,13 @@ on:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         target:
           - name: Borland C++ 4.52
             builder: windows-2022
             run_suffix: cmd
-            run: _build\win32_bc45_
+            run: _build\win32_bc45
             dir: _build/win32/borlnd45
           - name: HTML5
             builder: windows-2022
@@ -82,8 +83,8 @@ jobs:
           - name: Release
             locase: release
 
+    name: ${{ matrix.target.name }} (${{ matrix.config.name }})
     runs-on: ${{ matrix.target.builder }}
-    continue-on-error: true
 
     steps:
     - name: Checkout
