@@ -90,7 +90,7 @@ jobs:
             run: _build/macos_xcode
             dir: _build/macos/xcode
 
-    name: [${{ matrix.target.builder_name }}] ${{ matrix.target.name }}
+    name: (${{ matrix.target.builder_name }}) ${{ matrix.target.name }}
     runs-on: ${{ matrix.target.builder }}
 
     steps:
