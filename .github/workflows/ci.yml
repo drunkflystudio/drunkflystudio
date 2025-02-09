@@ -1,0 +1,104 @@
+
+# This continuous integration pipeline is triggered anytime a user pushes code to the repo.
+name: Continuous Integration
+
+# Trigger on every master branch push and pull request
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        target:
+          - name: Borland C++ 4.52
+            builder: windows-2022
+            run_suffix: cmd
+            run: _build\win32_bc45_
+            dir: _build/win32/borlnd45
+          - name: HTML5
+            builder: windows-2022
+            run_suffix: cmd
+            run: _build\win32_html5
+            dir: _build/html5
+          - name: Linux 64-bit cross-compiled from Windows
+            builder: windows-2022
+            run_suffix: cmd
+            run: _build\win32_linux64
+            dir: _build/linux64
+          - name: MinGW 4.4.0 32-bit
+            builder: windows-2022
+            run_suffix: cmd
+            run: _build\win32_mingw32_440
+            dir: _build/win32/mingw440
+          - name: MinGW 8.1.0 32-bit
+            builder: windows-2022
+            run_suffix: cmd
+            run: _build\win32_mingw32_810
+            dir: _build/win32/mingw810
+          - name: MinGW 8.1.0 64-bit
+            builder: windows-2022
+            run_suffix: cmd
+            run: _build\win32_mingw64_810
+            dir: _build/win64/mingw810
+          - name: MSVC 2022 32-bit
+            builder: windows-2022
+            run_suffix: cmd
+            run: _build\win32_msvc2022_32
+            dir: _build/win32/msvc2022
+          - name: MSVC 2022 64-bit
+            builder: windows-2022
+            run_suffix: cmd
+            run: _build\win32_msvc2022_64
+            dir: _build/win64/msvc2022
+          - name: Watcom 10.0a
+            builder: windows-2022
+            run_suffix: cmd
+            run: _build\win32_watcom10
+            dir: _build/win32/watcom10
+          - name: Ubuntu GCC 32-bit
+            builder: ubuntu-20.04
+            run_suffix: sh
+            run: sudo apt-get update && _build/linux_gcc32
+            dir: _build/linux32
+          - name: Ubuntu GCC 64-bit
+            builder: ubuntu-20.04
+            run_suffix: sh
+            run: sudo apt-get update && _build/linux_gcc64
+            dir: _build/linux64
+          - name: MacOS Xcode
+            builder: macos-13
+            run_suffix: sh
+            run: _build/macos_xcode
+            dir: _build/macos
+        config:
+          - name: Debug
+            locase: debug
+          - name: Release
+            locase: release
+
+    runs-on: ${{ matrix.target.builder }}
+    continue-on-error: true
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Build with ${{ matrix.target.name }} (${{ matrix.config.name }})
+      run: ${{ matrix.target.run }}_${{ matrix.config.locase }}.${{ matrix.target.run_suffix }}
+
+    - name: Upload artifacts for ${{ matrix.target.name }} (${{ matrix.config.name }})
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.target.name }} (${{ matrix.config.name }})
+        path: |
+          ${{ matrix.target.dir }}/${{ matrix.config.name }}
+          !${{ matrix.target.dir }}/${{ matrix.config.name }}/cmake
+        if-no-files-found: error
+        include-hidden-files: false
+        compression-level: 9
