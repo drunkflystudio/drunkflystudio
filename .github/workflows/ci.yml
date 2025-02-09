@@ -29,7 +29,7 @@ jobs:
             run_suffix: cmd
             run: _build\win32_html5
             dir: _build/html5
-          - name: Linux 64-bit cross-compiler
+          - name: Linux 64-bit
             builder: windows-2022
             builder_name: Windows
             run_suffix: cmd
