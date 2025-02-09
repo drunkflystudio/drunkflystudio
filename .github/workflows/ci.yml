@@ -86,7 +86,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Build with ${{ matrix.target.name }} (Debug)
-      run: ${{ matrix.target.run }}_debu.${{ matrix.target.run_suffix }}
+      run: ${{ matrix.target.run }}_debug.${{ matrix.target.run_suffix }}
       id: debug
       if: ${{ !cancelled() }}
 
