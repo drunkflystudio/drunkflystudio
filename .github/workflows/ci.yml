@@ -76,7 +76,7 @@ jobs:
             builder: macos-13
             run_suffix: sh
             run: _build/macos_xcode
-            dir: _build/macos
+            dir: _build/macos/xcode
 
     name: ${{ matrix.target.name }}
     runs-on: ${{ matrix.target.builder }}
