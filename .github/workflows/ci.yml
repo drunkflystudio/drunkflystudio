@@ -25,26 +25,13 @@ jobs:
     - name: Count lines of code
       run: _tools/count_lines_of_code.sh
 
-    - name: Upload CLOC.md
+    - name: Deploy
       uses: dmnemec/copy_file_to_another_repo_action@main
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        source_file: _build/CLOC.md
-        destination_repo: drunkflystudio/.github
-        destination_folder: badges/drunkflystudio
-        destination_branch: master
-        user_name: 'GitHub Action'
-        user_email: 'githubaction@example.com'
-        commit_message: 'Automatic commit from builder'
-
-    - name: Upload CLOC.svg
-      uses: dmnemec/copy_file_to_another_repo_action@main
-      env:
-        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-      with:
-        source_file: _build/CLOC.svg
-        destination_repo: drunkflystudio/.github
+        source_file: _build/CLOC
+        destination_repo: drunkflystudio/drunkflystudio.github.io
         destination_folder: badges/drunkflystudio
         destination_branch: master
         user_name: 'GitHub Action'
