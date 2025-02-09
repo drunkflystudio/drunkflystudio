@@ -1,3 +1,5 @@
+/_build/CLOC.md
+/_build/CLOC.svg
 /_build/_host_
 /_build/html5
 /_build/linux32
@@ -18,3 +20,4 @@
 /_tools/watcom10
 /_tools/win32-cmake-3.5.2
 /_tools/win32-cmake-3.31.4
+/_tools/win32-perl-5.12.3.0

@@ -12,6 +12,42 @@ on:
       - master
 
 jobs:
+  cloc:
+    name: Count Lines of Code
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: sudo apt-get update && apt-get install -y cloc wget
+
+    - name: Count lines of code
+      run: _tools/count_lines_of_code.sh
+
+    - name: Upload CLOC.md
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_file: _build/CLOC.svg
+        destination_repo: drunkflystudio/.github
+        destination_folder: badges/drunkflystudio
+        user_name: 'GitHub Action'
+        user_email: 'githubaction@example.com'
+        commit_message: 'Automatic commit from builder'
+
+    - name: Upload CLOC.svg
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_file: _build/CLOC.svg
+        destination_repo: drunkflystudio/.github
+        destination_folder: badges/drunkflystudio
+        user_name: 'GitHub Action'
+        user_email: 'githubaction@example.com'
+        commit_message: 'Automatic commit from builder'
+
   build:
     strategy:
       fail-fast: false

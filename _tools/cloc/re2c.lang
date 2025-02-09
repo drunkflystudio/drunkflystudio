@@ -1,0 +1,6 @@
+re2c
+    filter remove_matches /\*!re2c
+    filter remove_matches \"/\*\"
+    filter call_regexp_common C++
+    extension re2c
+    3rd_gen_scale 1.51

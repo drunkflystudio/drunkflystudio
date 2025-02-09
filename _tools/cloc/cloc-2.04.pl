@@ -141,10 +141,10 @@ my $HAVE_Win32_Long_Path = 0;
 # Windows will be used to support reading files past the 255 char
 # path length limit.
 if ($ON_WINDOWS) {
-    eval "use Win32::LongPath;";
-    if (defined $Win32::LongPath::VERSION) {
-        $HAVE_Win32_Long_Path = 1;
-    }
+    #eval "use Win32::LongPath;";
+    #if (defined $Win32::LongPath::VERSION) {
+    #    $HAVE_Win32_Long_Path = 1;
+    #}
 }
 my $config_file = '';
 if ( $ENV{'HOME'} ) {
@@ -661,15 +661,15 @@ if (defined $opt_vcs) {
         }
     }
     if      ($opt_vcs eq "git") {
-        $opt_vcs = "git -c \"safe.directory=*\" ls-files";
-        my @submodules = invoke_generator("git -c \"safe.directory=*\" submodule status", \@ARGV);
-        foreach my $SM (@submodules) {
-            $SM =~ s/^\s+//;        # may have leading space
-            $SM =~ s/\(\S+\)\s*$//; # may end with something like (heads/master)
-            my ($checksum, $dir) = split(' ', $SM, 2);
-            $dir =~ s/\s+$//;
-            $Exclude_Dir{$dir} = 1;
-        }
+        $opt_vcs = "git -c \"safe.directory=*\" ls-files --recurse-submodules";
+        #my @submodules = invoke_generator("git -c \"safe.directory=*\" submodule status", \@ARGV);
+        #foreach my $SM (@submodules) {
+        #    $SM =~ s/^\s+//;        # may have leading space
+        #    $SM =~ s/\(\S+\)\s*$//; # may end with something like (heads/master)
+        #    my ($checksum, $dir) = split(' ', $SM, 2);
+        #    $dir =~ s/\s+$//;
+        #    $Exclude_Dir{$dir} = 1;
+        #}
     } elsif ($opt_vcs eq "svn") {
         $opt_vcs = "svn list -R";
     }
