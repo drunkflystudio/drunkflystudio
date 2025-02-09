@@ -9,9 +9,12 @@ Drunk Fly Studio
 [![Linux badge](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black)](#building-on-linux)
 [![MacOS badge](https://img.shields.io/badge/macOS-5F5F5F?style=flat&logo=apple&logoColor=white)](#building-on-macos)
 [![HTML5 badge](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)](#)
-*
+<p float="right">
 [![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?logo=YouTube&logoColor=white)](https://youtube.com/drunkfly)
-===
+</p>
+---
+
+This project is under active development and has not yet reached any usable state.
 
 Building from source
 --------------------
