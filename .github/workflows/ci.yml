@@ -20,7 +20,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install -y cloc wget
+      run: sudo apt-get update && sudo apt-get install -y perl wget
 
     - name: Count lines of code
       run: _tools/count_lines_of_code.sh
