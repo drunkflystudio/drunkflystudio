@@ -169,37 +169,30 @@ jobs:
         compression-level: 9
 
   Deploy:
-    strategy:
-      fail-fast: false
-      matrix:
-        target:
-        - name: HTML5
-          deploy_name: html5
-        config:
-        - name: Debug
-          deploy_name: debug
-        - name: Release
-          deploy_name: release
-
-    name: Deploy ${{ matrix.target.name }} (${{ matrix.config.name }})
+    name: Deploy
     runs-on: ubuntu-latest
     needs: Build
 
     steps:
-    - name: Download artifacts for ${{ matrix.target.name }} (${{ matrix.config.name }})
+    - name: Download artifacts for HTML5 (Debug)
       uses: actions/download-artifact@v4
       with:
-        name: ${{ matrix.target.name }} (${{ matrix.config.name }})
-        path: ${{ matrix.target.deploy_name }}-${{ matrix.config.deploy_name }}
+        name: HTML5 (Debug)
+        path: latest/html5-debug
 
-    - name: Deploy ${{ matrix.target.name }} (${{ matrix.config.name }})
+    - name: Download artifacts for HTML5 (Release)
+      uses: actions/download-artifact@v4
+      with:
+        name: HTML5 (Release)
+        path: latest/html5-release
+
+    - name: Deploy
       uses: dmnemec/copy_file_to_another_repo_action@main
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        source_file: ${{ matrix.target.deploy_name }}-${{ matrix.config.deploy_name }}
+        source_file: latest
         destination_repo: drunkflystudio/drunkflystudio.github.io
-        destination_folder: latest
         destination_branch: master
         user_name: 'GitHub Action'
         user_email: 'githubaction@example.com'
