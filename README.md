@@ -58,7 +58,7 @@ Also you can run `open_xcode.sh` script to open project in Xcode.
 License
 -------
 
-Copyright &copy; 2024-2025 Nikolay Zapolnov
+Copyright &copy; 2024-2025 Nikolay Zapolnov<br>
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
