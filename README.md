@@ -6,7 +6,7 @@ Drunk Fly Studio
 &nbsp;
 [![CI/CD badge](https://github.com/drunkflystudio/drunkflystudio/actions/workflows/ci.yml/badge.svg)](https://github.com/drunkflystudio/drunkflystudio/actions/workflows/ci.yml)
 &nbsp;
-[![Code line count badge](https://sloc.xyz/github/drunkflystudio/drunkflystudio/)](https://github.com/drunkflystudio/drunkflystudio/)
+[![Code line count badge](https://raw.githubusercontent.com/drunkflystudio/.github/refs/heads/master/badges/drunkflystudio/CLOC.svg)](https://github.com/drunkflystudio/.github/blob/master/badges/drunkflystudio/CLOC.md)
 &nbsp;
 [![Visitors badge](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fdrunkflystudio%2Fdrunkflystudio&countColor=%230c7ebe&style=flat&labelStyle=none)](https://visitorbadge.io/status?path=https%3A%2F%2Fgithub.com%2Fdrunkflystudio%2Fdrunkflystudio)
 
