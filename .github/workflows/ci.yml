@@ -33,6 +33,7 @@ jobs:
         source_file: _build/CLOC.svg
         destination_repo: drunkflystudio/.github
         destination_folder: badges/drunkflystudio
+        destination_branch: master
         user_name: 'GitHub Action'
         user_email: 'githubaction@example.com'
         commit_message: 'Automatic commit from builder'
@@ -45,6 +46,7 @@ jobs:
         source_file: _build/CLOC.svg
         destination_repo: drunkflystudio/.github
         destination_folder: badges/drunkflystudio
+        destination_branch: master
         user_name: 'GitHub Action'
         user_email: 'githubaction@example.com'
         commit_message: 'Automatic commit from builder'
