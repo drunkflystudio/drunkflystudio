@@ -46,9 +46,9 @@ endmacro()
 
 ######################################################################################################################
 
-macro(require_macosx_host what)
+macro(require_macos_host what)
     if(NOT APPLE)
-        message(FATAL_ERROR "${what} requires MacOS X host.")
+        message(FATAL_ERROR "${what} requires MacOS host.")
     endif()
 endmacro()
 

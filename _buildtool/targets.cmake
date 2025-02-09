@@ -178,8 +178,8 @@ endif()
 ######################################################################################################################
 
 if(XCODE)
-    require_macosx_host("XCODE")
-    set(dir "macosx/xcode")
+    require_macos_host("XCODE")
+    set(dir "macos/xcode")
     generate_project(
         DIRECTORY "${dir}"
         GENERATOR "Xcode"
