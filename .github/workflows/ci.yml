@@ -185,23 +185,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: Build
 
-    environment:
-      name: approvers
-
     steps:
     - name: Download artifacts for ${{ matrix.target.name }} (${{ matrix.config.name }})
       uses: actions/download-artifact@v4
       with:
         name: ${{ matrix.target.name }} (${{ matrix.config.name }})
-
-    - name: Uncompress artifacts for ${{ matrix.target.name }} (${{ matrix.config.name }})
-      shell: bash
-      run: |
-        sudo apt-get update && sudo apt-get install -y unzip
-        ls
-        ls "$GITHUB_WORKSPACE"
-        unzip -d "${{ matrix.target.deploy_name }}-${{ matrix.config.deploy_name }}" \
-          "${{ matrix.target.name }} (${{ matrix.config.name }}).zip"
+        path: ${{ matrix.target.deploy_name }}-${{ matrix.config.deploy_name }}
 
     - name: Deploy ${{ matrix.target.name }} (${{ matrix.config.name }})
       uses: dmnemec/copy_file_to_another_repo_action@main
