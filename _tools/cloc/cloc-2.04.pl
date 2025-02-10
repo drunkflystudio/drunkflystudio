@@ -4968,7 +4968,7 @@ sub generate_report {                        # {{{1
             my @col_hyphens    = ( '--------') x $n_cols;
             push @results, join("|", @col_hyphens);
             push @results, $data_line   if $sum_files > 1 or $opt_sum_one;
-            unshift @results, ( "cloc|$header_line", "--- | ---", "", );
+            #unshift @results, ( "cloc|$header_line", "--- | ---", "", );
         } else {
             push @results, $hyphen_line if $sum_files > 1 or $opt_sum_one;
             push @results, $data_line   if $sum_files > 1 or $opt_sum_one;
