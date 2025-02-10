@@ -792,9 +792,9 @@ if ($opt_force_lang_def) {
     read_lang_def(
         $opt_force_lang_def    , #        Sample values:
         \%Language_by_Extension, # Language_by_Extension{f}    = 'Fortran 77'
-        \%Language_by_Script   , # Language_by_Script{sh}      = 'Bourne Shell'
+        \%Language_by_Script   , # Language_by_Script{sh}      = 'Unix .sh'
         \%Language_by_File_Type     , # Language_by_File_Type{makefile}  = 'make'
-        \%Filters_by_Language  , # Filters_by_Language{Bourne Shell}[0] =
+        \%Filters_by_Language  , # Filters_by_Language{Unix .sh}[0] =
                                  #      [ 'remove_matches' , '^\s*#'  ]
         \%Not_Code_Extension   , # Not_Code_Extension{jpg}     = 1
         \%Not_Code_Filename    , # Not_Code_Filename{README}   = 1
@@ -804,10 +804,10 @@ if ($opt_force_lang_def) {
 } else {
     set_constants(               #
         \%Language_by_Extension, # Language_by_Extension{f}    = 'Fortran 77'
-        \%Language_by_Script   , # Language_by_Script{sh}      = 'Bourne Shell'
+        \%Language_by_Script   , # Language_by_Script{sh}      = 'Unix .sh'
         \%Language_by_File_Type     , # Language_by_File_Type{makefile}  = 'make'
         \%Language_by_Prefix   , # Language_by_Prefix{Dockerfile}  = 'Dockerfile'
-        \%Filters_by_Language  , # Filters_by_Language{Bourne Shell}[0] =
+        \%Filters_by_Language  , # Filters_by_Language{Unix .sh}[0] =
                                  #      [ 'remove_matches' , '^\s*#'  ]
         \%Not_Code_Extension   , # Not_Code_Extension{jpg}     = 1
         \%Not_Code_Filename    , # Not_Code_Filename{README}   = 1
@@ -824,9 +824,9 @@ if ($opt_read_lang_def) {
     merge_lang_def(
         $opt_read_lang_def     , #        Sample values:
         \%Language_by_Extension, # Language_by_Extension{f}    = 'Fortran 77'
-        \%Language_by_Script   , # Language_by_Script{sh}      = 'Bourne Shell'
+        \%Language_by_Script   , # Language_by_Script{sh}      = 'Unix .sh'
         \%Language_by_File_Type     , # Language_by_File_Type{makefile}  = 'make'
-        \%Filters_by_Language  , # Filters_by_Language{Bourne Shell}[0] =
+        \%Filters_by_Language  , # Filters_by_Language{Unix .sh}[0] =
                                  #      [ 'remove_matches' , '^\s*#'  ]
         \%Not_Code_Extension   , # Not_Code_Extension{jpg}     = 1
         \%Not_Code_Filename    , # Not_Code_Filename{README}   = 1
@@ -4616,7 +4616,7 @@ sub generate_report {                        # {{{1
         }
     } else {
         $header_line =~ s/,// if $opt_csv;
-        push @results, output_header($header_line, $hyphen_line, $BY_FILE);
+        #push @results, output_header($header_line, $hyphen_line, $BY_FILE);
     }
 
     if ($Style eq "txt") {
@@ -8651,12 +8651,12 @@ sub set_constants {                          # {{{1
             'bazel'       => 'Starlark'              ,
             'BUILD'       => 'Bazel'                 ,
             'dxl'         => 'DOORS Extension Language',
-            'bat'         => 'DOS Batch'             ,
-            'BAT'         => 'DOS Batch'             ,
-            'cmd'         => 'DOS Batch'             ,
-            'CMD'         => 'DOS Batch'             ,
-            'btm'         => 'DOS Batch'             ,
-            'BTM'         => 'DOS Batch'             ,
+            'bat'         => 'Windows .bat/.cmd'     ,
+            'BAT'         => 'Windows .bat/.cmd'     ,
+            'cmd'         => 'Windows .bat/.cmd'     ,
+            'CMD'         => 'Windows .bat/.cmd'     ,
+            'btm'         => 'Windows .bat/.cmd'     ,
+            'BTM'         => 'Windows .bat/.cmd'     ,
             'blade'       => 'Blade'                 ,
             'blade.php'   => 'Blade'                 ,
             'build.xml'   => 'Ant'                   ,
@@ -9308,7 +9308,7 @@ sub set_constants {                          # {{{1
             'sas'         => 'SAS'                   ,
             'sass'        => 'Sass'                  ,
             'scss'        => 'SCSS'                  ,
-            'sh'          => 'Bourne Shell'          ,
+            'sh'          => 'Unix .sh'              ,
             'smarty'      => 'Smarty'                ,
             'sml'         => 'Standard ML'           ,
             'sig'         => 'Standard ML'           ,
@@ -9551,8 +9551,8 @@ sub set_constants {                          # {{{1
             'xsl'         => 'XSLT'                  ,
             'XSL'         => 'XSLT'                  ,
             'xtend'       => 'Xtend'                 ,
-            'yacc'        => 'yacc'                  ,
-            'y'           => 'yacc'                  ,
+            'yacc'        => 'Yacc'                  ,
+            'y'           => 'Yacc'                  ,
             'yml.mysql'   => 'YAML'                  ,
             'yaml-tmlanguage'=> 'YAML'                  ,
             'syntax'      => 'YAML'                  ,
@@ -9610,7 +9610,7 @@ sub set_constants {                          # {{{1
             'regina'   => 'Rexx'                  ,
             'ruby'     => 'Ruby'                  ,
             'sed'      => 'sed'                   ,
-            'sh'       => 'Bourne Shell'          ,
+            'sh'       => 'Unix .sh'              ,
             'swipl'    => 'Prolog'                ,
             'tcl'      => 'Tcl/Tk'                ,
             'tclsh'    => 'Tcl/Tk'                ,
@@ -9797,7 +9797,7 @@ sub set_constants {                          # {{{1
                                 [ 'remove_matches'      , '^\s*#'  ],
                                 [ 'remove_inline'       , '#.*$'   ],
                             ],
-    'Bourne Shell'       => [
+    'Unix .sh'           => [
                                 [ 'remove_matches'      , '^\s*#'  ],
                                 [ 'remove_inline'       , '#.*$'   ],
                             ],
@@ -10053,7 +10053,7 @@ sub set_constants {                          # {{{1
                                 [ 'remove_matches'      , '^\s*#'  ],
                                 [ 'remove_inline'       , '#.*$'   ],
                             ],
-    'DOS Batch'          => [
+    'Windows .bat/.cmd'  => [
                                 [ 'remove_matches'      , '^\s*rem' ],
                                 [ 'remove_matches'      , '^\s*::'  ],
                             ],
@@ -11246,7 +11246,7 @@ sub set_constants {                          # {{{1
                                 [ 'remove_matches'      , '^\s*;' ],
                                 [ 'remove_inline'       , ';.*$'  ],
                             ],
-    'yacc'               => [
+    'Yacc'               => [
                                 [ 'rm_comments_in_strings', '"', '/*', '*/' ],
                                 [ 'rm_comments_in_strings', '"', '//', '' ],
                                 [ 'call_regexp_common'  , 'C++'    ],
@@ -11436,7 +11436,7 @@ sub set_constants {                          # {{{1
     'sed'                =>     '\\\\$'         ,
     'Swift'              =>     '\\\\$'         ,
     'Bourne Again Shell' =>     '\\\\$'         ,
-    'Bourne Shell'       =>     '\\\\$'         ,
+    'Unix .sh'           =>     '\\\\$'         ,
     'C Shell'            =>     '\\\\$'         ,
     'kvlang'             =>     '\\\\$'         ,
     'Kermit'             =>     '\\\\$'         ,
@@ -11654,7 +11654,7 @@ sub set_constants {                          # {{{1
     'NASTRAN DMAP'                 =>   2.35,
     'DOORS Extension Language'     =>   1.50,
     'Dockerfile'                   =>   2.00,
-    'DOS Batch'                    =>   0.63,
+    'Windows .bat/.cmd'            =>   0.63,
     'Drools'                       =>   2.00,
     'ECPP'                         =>   1.90,
     'eda/sql'                      =>   6.67,
@@ -11849,7 +11849,7 @@ sub set_constants {                          # {{{1
     'Scheme'                       =>   1.51,
     'Slim'                         =>   3.00,
     'Solidity'                     =>   1.48,
-    'Bourne Shell'                 =>   3.81,
+    'Unix .sh'                     =>   3.81,
     'Bourne Again Shell'           =>   3.81,
     'ksh'                          =>   3.81,
     'zsh'                          =>   3.81,
@@ -11933,8 +11933,8 @@ sub set_constants {                          # {{{1
     'X++'                          =>   1.51, # This is a guess. Copied from C++, because the overhead for C++ headers might be equivalent to the overhead of structuring elements in XPO files
     'XAML'                         =>   1.90,
     'XQuery'                       =>   2.50,
-    'yacc'                         =>   1.51,
-    'yacc++'                       =>   1.51,
+    'Yacc'                         =>   1.51,
+    'Yacc++'                       =>   1.51,
     'YAML'                         =>   0.90,
     'Expect'                       => 2.00,
     'Gencat NLS'                   => 1.50,
