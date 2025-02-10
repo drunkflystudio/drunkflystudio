@@ -1,4 +1,6 @@
 
+set(CMAKE_EXECUTABLE_SUFFIX ".html")
+
 add_compiler_flag(-fno-ident FORCE)
 add_compiler_flag(-fno-plt FORCE)
 add_compiler_flag(-fvisibility=hidden FORCE)
