@@ -10,9 +10,10 @@ git submodule update --init --recursive
 
 echo Code Line Count > _build/CLOC/CLOC.md
 echo =============== >> _build/CLOC/CLOC.md
-echo Totals >> _build/CLOC/CLOC.md
-echo ------ >> _build/CLOC/CLOC.md
+echo Per Language >> _build/CLOC/CLOC.md
+echo ------------ >> _build/CLOC/CLOC.md
 perl _tools/cloc/cloc-2.04.pl --config=_tools/cloc/cloc.cfg --md . >> _build/CLOC/CLOC.md
+echo >> _build/CLOC/CLOC.md
 echo Per File >> _build/CLOC/CLOC.md
 echo -------- >> _build/CLOC/CLOC.md
 perl _tools/cloc/cloc-2.04.pl --config=_tools/cloc/cloc.cfg --by-file --md . >> _build/CLOC/CLOC.md
