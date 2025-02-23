@@ -53,9 +53,10 @@ endmacro()
 ######################################################################################################################
 
 macro(fly_module name)
-    set(compiled_c "${CMAKE_CURRENT_BINARY_DIR}/compiled.c")
+    set(compiled_c "${CMAKE_CURRENT_BINARY_DIR}/${name}.c")
+    set(compiled_bun "${CMAKE_CURRENT_BINARY_DIR}/${name}.bun")
     source_group("Source Files" FILES ${ARGN})
-    source_group("Generated Files" FILES "${compiled_c}")
+    source_group("Generated Files" FILES "${compiled_c}" "${compiled_bun}")
     set(src_c)
     set(src_fly)
     foreach(file ${ARGN})
@@ -69,11 +70,11 @@ macro(fly_module name)
             message(FATAL_ERROR "fly_module: unsupported file extension '${ext}'.")
         endif()
     endforeach()
-    add_custom_command(OUTPUT "${compiled_c}"
-        COMMAND "${HOST_FLYCC}" -bootstrap -o "${compiled_c}" ${src_fly}
+    add_custom_command(OUTPUT "${compiled_c}" "${compiled_bun}"
+        COMMAND "${HOST_FLYCC}" -bootstrap -bundle "${name}" -o "${compiled_c}" ${src_fly}
         DEPENDS ${ARGN} FlyCompiler
         )
-    add_library("${name}" STATIC "${compiled_c}" ${src_c} ${src_fly})
+    add_library("${name}" STATIC "${compiled_c}" "${compiled_bun}" ${src_c} ${src_fly})
     target_link_libraries("${name}" PUBLIC FlyCommon)
     if(NOT "${name}" STREQUAL "FlyRuntime")
         target_link_libraries("${name}" PUBLIC FlyRuntime)
