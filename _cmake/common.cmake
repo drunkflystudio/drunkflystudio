@@ -52,3 +52,20 @@ endmacro()
 
 ######################################################################################################################
 
+macro(compile_fly)
+    set(compiled_c "${CMAKE_CURRENT_BINARY_DIR}/compiled.c")
+    source_group("Source Files" FILES ${ARGN})
+    source_group("Generated Files" FILES "${compiled_c}")
+    set(args)
+    foreach(file ${ARGN})
+        get_filename_component(path "${file}" ABSOLUTE)
+        list(APPEND args "${path}")
+    endforeach()
+    list(APPEND src ${args} "${compiled_c}")
+    add_custom_command(OUTPUT "${compiled_c}"
+        COMMAND "${HOST_FLYCC}" -bootstrap -o "${compiled_c}" ${args}
+        DEPENDS ${ARGN} FlyCompiler
+        )
+endmacro()
+
+######################################################################################################################

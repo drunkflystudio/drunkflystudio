@@ -54,6 +54,22 @@ endforeach()
 set(buildtool_host_tools)
 
 include("${CMAKE_DIR}/projects.cmake")
+
+set(lua_interpreter_required FALSE)
+macro(lua_interpreter_required)
+    set(lua_interpreter_required TRUE)
+endmacro()
+
+set(lua_compiler_required FALSE)
+macro(lua_compiler_required)
+    set(lua_compiler_required TRUE)
+endmacro()
+
+set(fly_compiler_required FALSE)
+macro(require_fly_compiler)
+    set(fly_compiler_required TRUE)
+endmacro()
+
 foreach(dep ${deps})
     get_filename_component(CURRENT_PROJECT_DIR "${dep}" PATH)
     get_filename_component(CURRENT_PROJECT_DIR "${CURRENT_PROJECT_DIR}" PATH)
@@ -64,6 +80,29 @@ foreach(dep ${deps})
     endif()
     include("${dep}")
 endforeach()
+
+if(lua_interpreter_required OR lua_compiler_required OR fly_compiler_required)
+    set(targets)
+    set(executables)
+    if(lua_interpreter_required)
+        set(targets ${targets} LuaInterpreter)
+        set(executables ${executables} lua)
+    endif()
+    if(lua_compiler_required)
+        set(targets ${targets} LuaCompiler)
+        set(executables ${executables} luac)
+    endif()
+    if(fly_compiler_required)
+        set(targets ${targets} FlyCompiler)
+        set(executables ${executables} flycc)
+    endif()
+    build_host_tool(compiler
+        DIRECTORY "${PROJECT_DIR}"
+        TARGETS ${targets}
+        EXECUTABLES ${executables}
+        ONLY_WHEN_CROSSCOMPILING
+        )
+endif()
 
 ######################################################################################################################
 

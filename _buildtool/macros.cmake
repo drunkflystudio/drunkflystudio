@@ -267,7 +267,7 @@ endmacro()
 ######################################################################################################################
 
 macro(build_host_tool name)
-    set(options)
+    set(options ONLY_WHEN_CROSSCOMPILING)
     set(one DIRECTORY)
     set(multi TARGETS EXECUTABLES OPTIONS)
     cmake_parse_arguments(bht "${options}" "${one}" "${multi}" ${ARGN})
@@ -276,63 +276,73 @@ macro(build_host_tool name)
         message(FATAL_ERROR "build_host_tool: directory not specified!")
     endif()
 
-    set(flags)
-    if(APPLE)
-        set(dir "_host_/${name}")
-    else()
-        require_ninja()
-        if(WIN32)
-            require_mingw440_32()
-            set(flags
-                CC "${TOOLS_DIR}/mingw440_32/bin/gcc.exe"
-                CXX "${TOOLS_DIR}/mingw440_32/bin/g++.exe"
-                )
-        endif()
-        set(dir "_host_/${name}/Release")
-    endif()
-
-    generate_project(
-        DIRECTORY "${dir}"
-        SOURCES "${bht_DIRECTORY}"
-        BUILD_TYPE "Release"
-        OPTIONS ${bht_OPTIONS}
-        ${flags}
-        )
-
-    if(NOT bht_EXECUTABLES)
-        if(bht_TARGETS)
-            set(bht_EXECUTABLES ${bht_TARGET})
-        else()
-            set(bht_EXECUTABLES "${name}")
-        endif()
-    endiF()
-
-    if(NOT bht_TARGETS)
-        build_project(
-            DIRECTORY "${dir}"
-            BUILD_TYPE "Release"
-            )
-    else()
-        build_project(
-            DIRECTORY "${dir}"
-            BUILD_TYPE "Release"
-            TARGETS ${bht_TARGETS}
-            )
-    endif()
-
-    foreach(exename ${bht_EXECUTABLES})
+    if(CROSSCOMPILING OR NOT bht_ONLY_WHEN_CROSSCOMPILING)
+        set(flags)
         if(APPLE)
-            set(exe "${BUILD_DIR}/${dir}/Release/${exename}")
+            set(dir "_host_/${name}")
         else()
-            set(exe "${BUILD_DIR}/${dir}/${exename}")
+            require_ninja()
             if(WIN32)
-                set(exe "${exe}.exe")
+                require_mingw440_32()
+                set(flags
+                    CC "${TOOLS_DIR}/mingw440_32/bin/gcc.exe"
+                    CXX "${TOOLS_DIR}/mingw440_32/bin/g++.exe"
+                    )
+            endif()
+            set(dir "_host_/${name}/Release")
+        endif()
+
+        generate_project(
+            DIRECTORY "${dir}"
+            SOURCES "${bht_DIRECTORY}"
+            BUILD_TYPE "Release"
+            OPTIONS ${bht_OPTIONS}
+            ${flags}
+            )
+
+        if(NOT bht_EXECUTABLES)
+            if(bht_TARGETS)
+                set(bht_EXECUTABLES ${bht_TARGET})
+            else()
+                set(bht_EXECUTABLES "${name}")
             endif()
         endif()
-        if(NOT EXISTS "${exe}")
-            message(FATAL_ERROR "build_host_tool: file \"${exe}\" does not exist.")
+
+        if(NOT bht_TARGETS)
+            build_project(
+                DIRECTORY "${dir}"
+                BUILD_TYPE "Release"
+                )
+        else()
+            build_project(
+                DIRECTORY "${dir}"
+                BUILD_TYPE "Release"
+                TARGETS ${bht_TARGETS}
+                )
         endif()
-        string(TOUPPER "${exename}" upper_name)
-        list(APPEND buildtool_host_tools "${upper_name}=${exe}")
-    endforeach()
+
+        foreach(exename ${bht_EXECUTABLES})
+            if(APPLE)
+                set(exe "${BUILD_DIR}/${dir}/Release/${exename}")
+            else()
+                set(exe "${BUILD_DIR}/${dir}/${exename}")
+                if(WIN32)
+                    set(exe "${exe}.exe")
+                endif()
+            endif()
+            if(NOT EXISTS "${exe}")
+                message(FATAL_ERROR "build_host_tool: file \"${exe}\" does not exist.")
+            endif()
+            string(TOUPPER "${exename}" upper_name)
+            list(APPEND buildtool_host_tools "${upper_name}=${exe}")
+        endforeach()
+    else()
+        set(index 0)
+        foreach(exename ${bht_EXECUTABLES})
+            string(TOUPPER "${exename}" upper_name)
+            list(GET bht_TARGETS "${index}" target)
+            list(APPEND buildtool_host_tools "${upper_name}=${target}")
+            math(EXPR index "${index}+1")
+        endforeach()
+    endif()
 endmacro()

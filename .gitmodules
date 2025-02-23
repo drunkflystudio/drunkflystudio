@@ -6,3 +6,7 @@
 	path = base-compiler
 	url = https://github.com/drunkflystudio/base-compiler
 	branch = master
+[submodule "server-core"]
+	path = server-core
+	url = git@github.com:drunkflystudio/server-core
+	branch = master
