@@ -10,3 +10,7 @@
 	path = server-core
 	url = https://github.com/drunkflystudio/server-core
 	branch = master
+[submodule "base-runtime"]
+	path = base-runtime
+	url = https://github.com/drunkflystudio/base-runtime
+	branch = master
