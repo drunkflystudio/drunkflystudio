@@ -8,7 +8,7 @@ if exist bcc32-failed del bcc32-failed
     | "%~dp0..\..\..\_tools\gnuwin32\grep" ^
         -v "Turbo Link  Version 1.50 for Win32 Copyright (c) 1993,1994 Borland International" ^
     | "%~dp0..\..\..\_tools\gnuwin32\grep" ^
-        -v -E "%~d0[^.]*(.tab)?.c:$"
+        -v -E "(%~d0|(\.\.\\)*)[^.]*(.tab)?.c:$"
 if exist bcc32-failed (
     del bcc32-failed
     exit /B 1

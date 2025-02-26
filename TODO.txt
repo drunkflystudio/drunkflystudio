@@ -1,2 +1,0 @@
-1) rewrite bit[] to use customized token
-3) borland tlink32 pooling in cmake
