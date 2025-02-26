@@ -8,7 +8,7 @@ if(BORLAND_4_5)
         set(dir "win32/borlnd45/${build_type}")
         generate_project(
             DIRECTORY "${dir}"
-            GENERATOR "Makefiles"
+            GENERATOR "MinGW Makefiles"
             BUILD_TYPE "${build_type}"
             TOOLCHAIN "borland45/_win32"
             )

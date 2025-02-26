@@ -1,3 +1,2 @@
 1) rewrite bit[] to use customized token
-2) when running cmake from buildtool compare command-line arguments and rebuild if they have changed
 3) borland tlink32 pooling in cmake
