@@ -53,13 +53,18 @@ endmacro()
 ######################################################################################################################
 
 macro(fly_module name)
+    set(options)
+    set(one)
+    set(multi SOURCES USES)
+    cmake_parse_arguments(fm "${options}" "${one}" "${multi}" ${ARGN})
+
     set(compiled_c "${CMAKE_CURRENT_BINARY_DIR}/${name}.c")
     set(compiled_bun "${CMAKE_CURRENT_BINARY_DIR}/${name}.bun")
-    source_group("Source Files" FILES ${ARGN})
+    source_group("Source Files" FILES ${fm_SOURCES})
     source_group("Generated Files" FILES "${compiled_c}" "${compiled_bun}")
     set(src_c)
     set(src_fly)
-    foreach(file ${ARGN})
+    foreach(file ${fm_SOURCES})
         get_filename_component(path "${file}" ABSOLUTE)
         get_filename_component(ext "${file}" EXT)
         if("${ext}" STREQUAL ".c" OR "${ext}" STREQUAL ".h")
@@ -70,15 +75,29 @@ macro(fly_module name)
             message(FATAL_ERROR "fly_module: unsupported file extension '${ext}'.")
         endif()
     endforeach()
+
+    set(src_bun)
+    foreach(bundle ${fm_USES})
+        get_target_property(bundle_binary_dir "${bundle}" BINARY_DIR)
+        list(APPEND src_bun "${bundle_binary_dir}/${bundle}.bun")
+    endforeach()
+
     add_custom_command(OUTPUT "${compiled_c}" "${compiled_bun}"
-        COMMAND "${HOST_FLYCC}" -bootstrap -bundle "${name}" -o "${compiled_c}" ${src_fly}
-        DEPENDS ${ARGN} FlyCompiler
+        COMMAND "${HOST_FLYCC}" -bootstrap -bundle "${name}" -o "${compiled_c}" ${src_fly} ${src_bun}
+        DEPENDS ${src_fly} ${src_bun} FlyCompiler
         )
-    add_library("${name}" STATIC "${compiled_c}" "${compiled_bun}" ${src_c} ${src_fly})
+
+    add_library("${name}" STATIC
+        "${compiled_c}"
+        "${compiled_bun}"
+        ${src_c}
+        ${src_fly}
+        )
+
     target_link_libraries("${name}" PUBLIC FlyCommon)
-    if(NOT "${name}" STREQUAL "FlyRuntime")
-        target_link_libraries("${name}" PUBLIC FlyRuntime)
-    endif()
+    foreach(bundle ${fm_USES})
+        target_link_libraries("${name}" PUBLIC "${bundle}")
+    endforeach()
 endmacro()
 
 ######################################################################################################################
